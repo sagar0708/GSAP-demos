@@ -7,22 +7,28 @@
   <title>GreenShok</title>
 </head>
 <body>
-  <div class="btns">
-    <button onclick="tweenlight()">TweenLite</button>
-    <button onclick="easeBounce()">Ease Bounce</button>
-    <button onclick="easeElasctic()">Ease Elastic</button>
-    <button onclick="easeBack()">Ease Back</button>
-    <button onclick="easeStepped()">Ease Stepped</button>
-    <button onclick="staggerEffect()">Stagger Effect</button>
+  <div class="tweenlite">
+    <div class="btns">
+      <button onclick="tweenlight()">TweenLite</button>
+      <button onclick="easeBounce()">Ease Bounce</button>
+      <button onclick="easeElasctic()">Ease Elastic</button>
+      <button onclick="easeBack()">Ease Back</button>
+      <button onclick="easeStepped()">Ease Stepped</button>
+      <button onclick="staggerEffect()">Stagger Effect</button>
+    </div>
+    <div id="tweenlite">
+      <p>GreenShok</p>
+    </div>
+    <br><br>
+    <div id="stagger">
+      <div class="stagger-item"></div>
+      <div class="stagger-item"></div>
+      <div class="stagger-item"></div>
+    </div>
   </div>
-  <div id="tweenlite">
-    <p>GreenShok</p>
-  </div>
-  <br><br>
-  <div id="stagger">
-    <div class="stagger-item"></div>
-    <div class="stagger-item"></div>
-    <div class="stagger-item"></div>
+  <div class="scrollTrigger">
+    <div class="sqre1"></div>
+    <div class="sqre2"></div>
   </div>
   <!-- scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
@@ -55,7 +61,7 @@
       TweenLite.fromTo(
         tl, 
         1,{x:0,y:0}, 
-        {x:100, y:100, width:100, height: 100,ease: "bounce.out"}
+        {y:100, width:100, height: 100,ease: "bounce.out"}
       )
       TweenLite.fromTo(
         tlP, 
@@ -69,7 +75,7 @@
         tl, 
         1,
         {x:0,y:0}, 
-        {x:100, y:100, width:100, height: 100,ease: "elastic.out"}
+        {y:100, width:100, height: 100,ease: "elastic.out"}
       )
       TweenLite.fromTo(
         tlP, 
@@ -83,7 +89,7 @@
         tl, 
         1,
         {x:0,y:0}, 
-        {x:100, y:100, width:100, height: 100,ease: "back.inOut(3)"}
+        {y:100, width:100, height: 100,ease: "back.inOut(3)"}
       )
       TweenLite.fromTo(
         tlP, 
@@ -112,6 +118,23 @@
     function staggerComplete(){
       $(".stagger-item").css({"opacity":"0","width":"0","height":"0"});
     }
+    // scrollTrigger
+
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.to(".sqre1",{
+      x:1000,
+      duration:8,
+      scrollTrigger:{
+        trigger:".sqre2",
+        start: "top 80%",
+        end:"top 30%",
+        toggleAction: "restart none none none",
+        pin: true,
+        pinSpacing: true,
+        scrub: 2,
+        markers:true
+      }
+    })
   </script>
 </body>
 <style>
@@ -121,9 +144,22 @@
     box-sizing: border-box;
   }
   body{
-    background-color: aquamarine;
+    background-color: #ccc;
+    padding: 50px;
+  }
+  .tweenlite ,.scrollTrigger{
+    height: 100vh;
+    width: 100%;
+    padding: 25px;
+  }
+  .tweenlite{
+    background-color: darkgreen;
+  }
+  .scrollTrigger{
+    background-color: darkgoldenrod;
   }
   #tweenlite{
+    margin-top: 20px;
     height: 50px;
     width: 50px;
     background-color: red;
@@ -150,6 +186,16 @@
     height: 0;
     border-radius: 50%;
     opacity: 0;
+  }
+  .sqre1{
+    width: 100px;
+    height: 100px;
+    background-color: brown;
+  }
+  .sqre2{
+    width: 100px;
+    height: 100px;
+    background-color: darkblue;
   }
 </style>
 </html>
