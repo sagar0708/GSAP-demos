@@ -12,10 +12,19 @@
     <button onclick="easeBounce()">Ease Bounce</button>
     <button onclick="easeElasctic()">Ease Elastic</button>
     <button onclick="easeBack()">Ease Back</button>
+    <button onclick="easeStepped()">Ease Stepped</button>
+    <button onclick="staggerEffect()">Stagger Effect</button>
   </div>
   <div id="tweenlite">
-    <p>TweenLite</p>
+    <p>GreenShok</p>
   </div>
+  <br><br>
+  <div id="stagger">
+    <div class="stagger-item"></div>
+    <div class="stagger-item"></div>
+    <div class="stagger-item"></div>
+  </div>
+  <!-- scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/CSSRulePlugin.min.js"></script>
@@ -30,20 +39,78 @@
     var tl = $("#tweenlite");
     var tlP = $("#tweenlite p");
     function tweenlight(){
-      TweenLite.fromTo(tl, 1,{x:0,y:0}, {x:100, y:100, width:100, height: 100})
-      TweenLite.fromTo(tlP, 1,{autoAlpha: 0},{autoAlpha: 1, delay: 0})
+      TweenLite.fromTo(
+        tl, 
+        1,{x:0,y:0}, 
+        {x:100, y:100, width:100, height: 100}
+      )
+      TweenLite.fromTo(
+        tlP, 
+        1,
+        {autoAlpha: 0},
+        {autoAlpha: 1, delay: 0}
+      )
     }
     function easeBounce(){
-      TweenLite.fromTo(tl, 1,{x:0,y:0}, {x:100, y:100, width:100, height: 100,ease: "bounce.out"})
-      TweenLite.fromTo(tlP, 1,{autoAlpha: 0},{autoAlpha: 1, delay: 0})
+      TweenLite.fromTo(
+        tl, 
+        1,{x:0,y:0}, 
+        {x:100, y:100, width:100, height: 100,ease: "bounce.out"}
+      )
+      TweenLite.fromTo(
+        tlP, 
+        1,
+        {autoAlpha: 0},
+        {autoAlpha: 1, delay: 0}
+      )
     }
     function easeElasctic(){
-      TweenLite.fromTo(tl, 1,{x:0,y:0}, {x:100, y:100, width:100, height: 100,ease: "elastic.out"})
-      TweenLite.fromTo(tlP, 1,{autoAlpha: 0},{autoAlpha: 1, delay: 0})
+      TweenLite.fromTo(
+        tl, 
+        1,
+        {x:0,y:0}, 
+        {x:100, y:100, width:100, height: 100,ease: "elastic.out"}
+      )
+      TweenLite.fromTo(
+        tlP, 
+        1,
+        {autoAlpha: 0},
+        {autoAlpha: 1, delay: 0}
+      )
     }
     function easeBack(){
-      TweenLite.fromTo(tl, 1,{x:0,y:0}, {x:100, y:100, width:100, height: 100,ease: "back.inOut(3)"})
-      TweenLite.fromTo(tlP, 1,{autoAlpha: 0},{autoAlpha: 1, delay: 0})
+      TweenLite.fromTo(
+        tl, 
+        1,
+        {x:0,y:0}, 
+        {x:100, y:100, width:100, height: 100,ease: "back.inOut(3)"}
+      )
+      TweenLite.fromTo(
+        tlP, 
+        1,
+        {autoAlpha: 0},
+        {autoAlpha: 1, delay: 0}
+      )
+    }
+    function easeStepped(){
+      TweenLite.fromTo(
+        tl, 
+        1,
+        {x:0,y:0}, 
+        {x:100, y:100, width:100, height: 100,ease: "steps(5)"}
+      )
+      TweenLite.fromTo(
+        tlP, 
+        1,
+        {autoAlpha: 0},
+        {autoAlpha: 1, delay: 0}
+      )
+    }
+    function staggerEffect(){
+      gsap.to(".stagger-item", {duration: 1, opacity: 1, width:50, height:50, stagger: 0.5, onComplete:staggerComplete} )
+    }
+    function staggerComplete(){
+      $(".stagger-item").css({"opacity":"0","width":"0","height":"0"});
     }
   </script>
 </body>
@@ -67,6 +134,21 @@
     position: relative;
     top: 50%;
     transform: translate(0,-50%);
+    opacity: 0;
+  }
+  #stagger{
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #stagger .stagger-item{
+    display: inline-block;
+    background-color: #000;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
     opacity: 0;
   }
 </style>
