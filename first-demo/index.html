@@ -25,6 +25,7 @@
       <div class="stagger-item"></div>
       <div class="stagger-item"></div>
     </div>
+    <p>scroll down</p>
   </div>
   <div class="scrollTrigger">
     <div class="sqre1"></div>
@@ -122,16 +123,16 @@
 
     gsap.registerPlugin(ScrollTrigger);
     gsap.to(".sqre1",{
-      x:1000,
-      duration:8,
+      left:"50%",
+      borderRadius: "50%",
       scrollTrigger:{
         trigger:".sqre2",
         start: "top 80%",
         end:"top 30%",
-        toggleAction: "restart none none none",
+        toggleAction: "restart pause restart none",
         pin: true,
         pinSpacing: true,
-        scrub: 2,
+        scrub: 4,
         markers:true
       }
     })
@@ -191,11 +192,21 @@
     width: 100px;
     height: 100px;
     background-color: brown;
+    position: relative;
+    left: 0;
   }
   .sqre2{
     width: 100px;
     height: 100px;
     background-color: darkblue;
+  }
+  p{
+    display: inline-block;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    color: #ccc;
+    font-size: 34px;
   }
 </style>
 </html>
